@@ -8,3 +8,6 @@ To prevent issues with scenarios Cheat Saver looks for a ride or shop with `--ch
 
 ## Installation
 Copy the JS file in the `build` directory from this repository to `OpenRCT2/plugin`, you can access the tools via the map toolbar.
+
+## Developers
+The GUI for this plugin was made using [oliUI](https://github.com/oli414/OliUI). 
