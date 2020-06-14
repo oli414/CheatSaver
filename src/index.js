@@ -54,7 +54,7 @@ function getDefaultSetup(currentSettings = {}) {
     let settings = {};
     for (let i = 0; i < BooleanOptions.length; i++) {
         let key = BooleanOptions[i];
-        if (currentSettings[key]) {
+        if (currentSettings[key] != null) {
             settings[key] = currentSettings[key];
         }
         else {

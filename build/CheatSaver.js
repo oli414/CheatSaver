@@ -2712,7 +2712,7 @@ function getDefaultSetup() {
     var settings = {};
     for (var i = 0; i < BooleanOptions.length; i++) {
         var key = BooleanOptions[i];
-        if (currentSettings[key]) {
+        if (currentSettings[key] != null) {
             settings[key] = currentSettings[key];
         } else {
             settings[key] = false;
