@@ -150,7 +150,8 @@ function main() {
 
 registerPlugin({
     name: 'Cheat Saver',
-    version: '1.0',
+    version: '1.1',
+    licence: "MIT",
     authors: ['Oli414'],
     type: 'local',
     main: main
