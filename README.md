@@ -7,7 +7,8 @@ To prevent issues with scenarios Cheat Saver looks for a ride or shop with `--ch
 ![](https://i.imgur.com/bTbUpn1.png)
 
 ## Installation
-Copy the JS file in the `build` directory from this repository to `OpenRCT2/plugin`, you can access the tools via the map toolbar.
+Download the JS file from the [latest release](https://github.com/oli414/CheatSaver/releases) and put it in `OpenRCT2/plugin`, you can access the tools via the map toolbar.
+
 
 Check my tutorial if you're new to Plugins and/or Github:
 https://youtu.be/ZaM5pXDO03w?t=355
