@@ -1,3 +1,5 @@
+This plugin will soon be deprecated. An experimental version of the new save file format (nsf) is testing, the nsf will feature the ability to store the enabled cheats along with the save file meaning that this plugin will no longer be needed.
+
 # Cheat Saver
 Are you tired of having to enable the cheats you want every time you open the game?
 
