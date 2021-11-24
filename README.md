@@ -1,4 +1,7 @@
-This plugin will soon be deprecated. An experimental version of the new save file format (nsf) is being tested, the nsf will feature the ability to store the enabled cheats along with the save file meaning that this plugin will no longer be needed.
+**IMPORTANT**: This plugin has now started to become deprecated:
+- Since develop version v0.3.5.1 (inclusive) 
+- After release version v0.3.5.1 (exclusive)
+The versions listed above will save the settings on a per park basis thanks to the new save format. You will no longer need this plugin to achieve the functionality that this plugin adds.
 
 # Cheat Saver
 Are you tired of having to enable the cheats you want every time you open the game?
