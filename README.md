@@ -1,6 +1,6 @@
 **IMPORTANT**: This plugin has now started to become deprecated:
-- Since develop version v0.3.5.1 (inclusive) 
-- After release version v0.3.5.1 (exclusive)
+- Since OpenRCT2 develop version v0.3.5.1 (inclusive) 
+- After OpenRCT2 release version v0.3.5.1 (exclusive)
 
 The versions listed above will save the settings on a per park basis thanks to the new save format. You will no longer need this plugin to achieve the functionality that this plugin adds.
 
