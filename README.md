@@ -12,7 +12,7 @@ You can choose which cheats should be enabled by default by pressing down on the
 
 To prevent Cheat Saver from loading in a specific park you can disable it with a checkbox in the Cheat Saver window.
 
-![](https://i.imgur.com/bTbUpn1.png)
+![image](https://user-images.githubusercontent.com/2348094/156785583-21621d4f-d7e1-4e46-9951-db7e6649aef0.png)
 
 ## Installation
 Download the latest CheatSaver.js file from the releases page: https://github.com/oli414/CheatSaver/releases/ And place it in the `OpenRCT2/plugin` directory of your OpenRCT2 installation. You can now access the plugin by pressing down on the map tool button in game.
