@@ -2726,20 +2726,22 @@ function getDefaultSetup() {
 
 function main() {
     var isActive = false;
-    if (network.mode == "none") {
-        for (var i = 0; i < map.rides.length; i++) {
-            if (map.rides[i].name.includes("--cheats")) {
-                isActive = true;
-                break;
-            }
-        }
+    var isEnabledForPark = true;
+
+    var loadedParkSettings = context.getParkStorage("Oli414.CheatSaver");
+    if (loadedParkSettings.get("disableOverwrite", false)) {
+        isEnabledForPark = false;
+    }
+
+    if (network.mode == "none" && isEnabledForPark) {
+        isActive = true;
     }
 
     var loadedSettings = context.sharedStorage.get("Oli414.CheatSave");
     var settings = getDefaultSetup(loadedSettings);
 
-    for (var _i3 = 0; _i3 < BooleanOptions.length; _i3++) {
-        var key = BooleanOptions[_i3];
+    for (var i = 0; i < BooleanOptions.length; i++) {
+        var key = BooleanOptions[i];
         if (isActive) cheats[key] = settings[key];
     }
 
@@ -2748,44 +2750,41 @@ function main() {
     window.setWidth(280);
 
     var label = null;
-    if (isActive) {
-        label = new Oui.Widgets.Label("Cheat saver is active in this park since a ride or shop");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("in this park has \"--cheats\" in the name.");
-        label.setMargins(0, 10, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Set the default cheats to enable:");
-        label.setMargins(0, 6, 0, 0);
-        window.addChild(label);
-    } else {
-        label = new Oui.Widgets.Label("Cheat saver is not active in this park.");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Add \"--cheats\" to a ride or shop name, then save and");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("load the map to enable Cheat Saver for this park.");
-        label.setMargins(0, 10, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Set the default cheats to enable:");
-        label.setMargins(0, 6, 0, 0);
-        window.addChild(label);
-    }
+    label = new Oui.Widgets.Label("Cheat Saver allows you to set which cheats you");
+    label.setMargins(0, 2, 0, 0);
+    window.addChild(label);
+    label = new Oui.Widgets.Label("would like to be enabled by default.");
+    label.setMargins(0, 12, 0, 0);
+    window.addChild(label);
+
+    var activeCheckbox = new Oui.Widgets.Checkbox("Disable the cheats overwrite for this park file.", function (value) {
+        loadedParkSettings.set("disableOverwrite", value);
+    });
+    activeCheckbox.setChecked(!isEnabledForPark);
+    activeCheckbox.setMargins(0, 4, 0, 0);
+    window.addChild(activeCheckbox);
+
+    label = new Oui.Widgets.Label("Changes come into affect after reloading the park.");
+    label.setMargins(0, 12, 0, 0);
+    window.addChild(label);
+
+    label = new Oui.Widgets.Label("Set the default cheats to enable:");
+    label.setMargins(0, 6, 0, 0);
+    window.addChild(label);
 
     var currentGroupBox = new Oui.GroupBox("Common");
     window.addChild(currentGroupBox);
 
-    var _loop = function _loop(_i4) {
-        if (_i4 == 7) {
+    var _loop = function _loop(_i3) {
+        if (_i3 == 7) {
             currentGroupBox = new Oui.GroupBox("Park");
             window.addChild(currentGroupBox);
-        } else if (_i4 == 11) {
+        } else if (_i3 == 11) {
             currentGroupBox = new Oui.GroupBox("Ride");
             window.addChild(currentGroupBox);
         }
 
-        var key = BooleanOptions[_i4];
+        var key = BooleanOptions[_i3];
 
         var checkBox = new Oui.Widgets.Checkbox(toCapitalizedWords(key), function (value) {
             settings[key] = value;
@@ -2796,8 +2795,8 @@ function main() {
         currentGroupBox.addChild(checkBox);
     };
 
-    for (var _i4 = 0; _i4 < BooleanOptions.length; _i4++) {
-        _loop(_i4);
+    for (var _i3 = 0; _i3 < BooleanOptions.length; _i3++) {
+        _loop(_i3);
     }
 
     ui.registerMenuItem("Cheat Saver", function () {
@@ -2807,8 +2806,9 @@ function main() {
 
 registerPlugin({
     name: 'Cheat Saver',
-    version: '1.1',
+    version: '1.2',
     licence: "MIT",
+    targetApiVersion: 46,
     authors: ['Oli414'],
     type: 'local',
     main: main

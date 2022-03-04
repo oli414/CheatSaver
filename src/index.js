@@ -37,7 +37,7 @@ const BooleanOptions = [
     "showAllOperatingModes",
     "allowArbitraryRideTypeChanges",
     "allowTrackPlaceInvalidHeights",
-    "showVehiclesFromOtherTrackTypes",
+    "showVehiclesFromOtherTrackTypes"
 ]
 
 const DefaultOptions = {
@@ -69,14 +69,18 @@ function getDefaultSetup(currentSettings = {}) {
 
 function main() {
     let isActive = false;
-    if (network.mode == "none") {
-        for (let i = 0; i < map.rides.length; i++) {
-            if (map.rides[i].name.includes("--cheats")) {
-                isActive = true;
-                break;
-            }
-        }
+    let isEnabledForPark = true;
+    
+    let loadedParkSettings = context.getParkStorage("Oli414.CheatSaver");
+    if (loadedParkSettings.get("disableOverwrite", false))
+    {
+        isEnabledForPark = false;
     }
+    
+    if (network.mode == "none" && isEnabledForPark) {
+        isActive = true;
+    }
+    
 
     let loadedSettings = context.sharedStorage.get("Oli414.CheatSave");
     let settings = getDefaultSetup(loadedSettings);
@@ -92,31 +96,27 @@ function main() {
     window.setWidth(280);
 
     let label = null;
-    if (isActive) {
-        label = new Oui.Widgets.Label("Cheat saver is active in this park since a ride or shop");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("in this park has \"--cheats\" in the name.");
-        label.setMargins(0, 10, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Set the default cheats to enable:");
-        label.setMargins(0, 6, 0, 0);
-        window.addChild(label);
-    }
-    else {
-        label = new Oui.Widgets.Label("Cheat saver is not active in this park.");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Add \"--cheats\" to a ride or shop name, then save and");
-        label.setMargins(0, 0, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("load the map to enable Cheat Saver for this park.");
-        label.setMargins(0, 10, 0, 0);
-        window.addChild(label);
-        label = new Oui.Widgets.Label("Set the default cheats to enable:");
-        label.setMargins(0, 6, 0, 0);
-        window.addChild(label);
-    }
+    label = new Oui.Widgets.Label("Cheat Saver allows you to set which cheats you");
+    label.setMargins(0, 2, 0, 0);
+    window.addChild(label);
+    label = new Oui.Widgets.Label("would like to be enabled by default.");
+    label.setMargins(0, 12, 0, 0);
+    window.addChild(label);
+    
+    let activeCheckbox = new Oui.Widgets.Checkbox("Disable the cheats overwrite for this park file.", (value) => {
+        loadedParkSettings.set("disableOverwrite", value);
+    });
+    activeCheckbox.setChecked(!isEnabledForPark);
+    activeCheckbox.setMargins(0, 4, 0, 0);
+    window.addChild(activeCheckbox);
+
+    label = new Oui.Widgets.Label("Changes come into affect after reloading the park.");
+    label.setMargins(0, 12, 0, 0);
+    window.addChild(label);
+
+    label = new Oui.Widgets.Label("Set the default cheats to enable:");
+    label.setMargins(0, 6, 0, 0);
+    window.addChild(label);
 
     let currentGroupBox = new Oui.GroupBox("Common");
     window.addChild(currentGroupBox);
@@ -150,8 +150,9 @@ function main() {
 
 registerPlugin({
     name: 'Cheat Saver',
-    version: '1.1',
+    version: '1.2',
     licence: "MIT",
+    targetApiVersion: 46,
     authors: ['Oli414'],
     type: 'local',
     main: main

@@ -1,12 +1,12 @@
 {
   "name": "CheatSaver",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "rollup ./src/index.js --file ./build/CheatSaver.js && babel ./build/CheatSaver.js --out-file ./build/CheatSaver.js && cpy ./build/CheatSaver.js ../../plugin/ --rename=CheatSaver.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm-watch"
+    "watch": "npm-watch build"
   },
   "watch": {
     "build": "src/*.js"
