@@ -1,9 +1,3 @@
-**IMPORTANT**: This plugin has now started to become deprecated:
-- Since OpenRCT2 develop version v0.3.5.1 (inclusive) 
-- After OpenRCT2 release version v0.3.5.1 (exclusive)
-
-The versions listed above will save the settings on a per park basis thanks to the new save format. You will no longer need this plugin to achieve the functionality that this plugin adds.
-
 # Cheat Saver
 Are you tired of having to enable the cheats you want every time you start a new park?
 
